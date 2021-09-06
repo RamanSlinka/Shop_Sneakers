@@ -6,10 +6,52 @@ import sneakers from './common/Sneakers/8.jpeg'
 import plus from './common/plus-icon.png'
 import search from './common/Search.ico'
 import heartUnliked from './common/gray_heart.png'
+import removeBtn from './common/button-delete.jpg'
+import arrow from './common/arrow.png'
 
 function App() {
     return (
         <div className="wrapper clear">
+            <div className='overlay'>
+                <div className="drawer">
+                    <h2 className='mb-30 d-flex justify-between'>Shopping Bag
+                        <img src={removeBtn} alt="Remove" width={30} className='removeBtn cu-p'/>
+                    </h2>
+
+                    <div className="items">
+                        <div className="cartItem d-flex align-center mb-20">
+                            <img src={sneakers} alt="sneakers" width={70} height={70} className='mr-20'/>
+                            <div className='mr-20 flex' >
+                                <p className='mb-5'>Lorem ipsum dolor sit amet, consectetur.</p>
+                                <b>299$</b>
+                            </div>
+                            <img src={removeBtn} alt="Remove" width={30} className='removeBtn'/>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <ul className='cartTotalBlock'>
+                        <li >
+                            <span>Total</span>
+                            <div></div>
+                            <b>11000$</b>
+                        </li>
+                        <li >
+                            <span>Sale</span>
+                            <div></div>
+                            <b>5%</b>
+                        </li>
+                    </ul>
+                    <button className='greenBtn'>Place an order
+                    <img src={arrow} alt='arrow' width={20} className='arrow'/>
+                    </button>
+                </div>
+            </div>
+
+
             <header className='d-flex justify-between align-center p-40'>
                 <div className='d-flex align-center'>
                     <img src={logo} className='logo'/>
@@ -42,9 +84,9 @@ function App() {
 
                 <div className='d-flex'>
                     <div className='card '>
-                      <div className='favorite'>
-                          <img src={heartUnliked} alt="heartUnliked" width={20}/>
-                      </div>
+                        <div className='favorite'>
+                            <img src={heartUnliked} alt="heartUnliked" width={20}/>
+                        </div>
                         <img src={sneakers} alt="sneakers" width={133} height={112}/>
                         <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, rerum!</h5>
                         <div className='d-flex justify-between align-center'>
