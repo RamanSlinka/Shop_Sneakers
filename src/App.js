@@ -1,8 +1,50 @@
-
 import search from './common/Search.ico'
-import Card from "./components/Card";
+import Card from "./components/Card/Card";
 import ShoppingBag from "./components/ShoppingBag";
 import Header from "./components/Header";
+import image from './common/Sneakers/1.jpeg'
+import image2 from './common/Sneakers/2.jpeg'
+import image3 from './common/Sneakers/3.jpeg'
+import image4 from './common/Sneakers/4.jpeg'
+
+
+const state = [
+    {
+        title: 'Lorem Lorem Lorem Lorem v Lorem',
+        imageUrl: image,
+        price: 199
+    },
+    {
+        title: 'Lorem Lorem Lorem Lorem v Lorem',
+        imageUrl: image2,
+        price: 299
+    },
+    {
+        title: 'Lorem Lorem Lorem Lorem v Lorem',
+        imageUrl: image3,
+        price: 279
+    },
+    {
+        title: 'Lorem Lorem Lorem Lorem v Lorem',
+        imageUrl: image4,
+        price: 399
+    },
+    {
+        title: 'Lorem Lorem Lorem Lorem v Lorem',
+        imageUrl: image3,
+        price: 279
+    },
+    {
+        title: 'Lorem Lorem Lorem Lorem v Lorem',
+        imageUrl: image,
+        price: 199
+    },
+    {
+        title: 'Lorem Lorem Lorem Lorem v Lorem',
+        imageUrl: image2,
+        price: 299
+    },
+]
 
 function App() {
     return (
@@ -10,7 +52,6 @@ function App() {
 
             <ShoppingBag/>
             <Header/>
-
 
 
             <div className="content p-40">
@@ -23,12 +64,15 @@ function App() {
                 </div>
 
 
-                <div className='d-flex flex-wrap mb-50'>
-                    <Card/>
+                <div className='d-flex flex-wrap '>
+                    {state.map((obj) => (
+                        <Card
+                            title={obj.title}
+                            price={obj.price}
+                            imageUrl={obj.imageUrl}
+                        />
+                    ))}
 
-                    <Card/>
-                    <Card/>
-                    <Card/>
 
                 </div>
 
