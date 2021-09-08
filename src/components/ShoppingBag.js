@@ -15,8 +15,9 @@ const ShoppingBag = ({onClose, items = []}) => {
 
                 <div className="items">
 
-                    {items.map((obj) => (
-                    <div className="cartItem d-flex align-center mb-20">
+                    {items.map((obj, index) => (
+
+                    <div key={index} className="cartItem d-flex align-center mb-20">
                         <img src={obj.imageUrl} alt="sneakers" width={70} height={70} className='mr-20'/>
                         <div className='mr-20 flex'>
                             <p className='mb-5'>{obj.title}</p>
@@ -25,6 +26,7 @@ const ShoppingBag = ({onClose, items = []}) => {
                         <img
                             src={removeBtn} alt="Remove" width={30} className='removeBtn'/>
                     </div>
+
                     ))}
 
                 </div>

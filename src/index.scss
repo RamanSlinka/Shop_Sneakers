@@ -57,12 +57,20 @@ header {
   border-radius: 10px;
   padding: 0 15px;
   height: 40px;
+  position: relative;
 
   .search-icon {
 
     opacity: 0.5;
   }
+.clear{
+  position: absolute;
 
+  width: 18px;
+  height: 18px;
+  top: 10px;
+  right: 10px;
+}
   input {
     border: 0;
     padding: 13px;

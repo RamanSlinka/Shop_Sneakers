@@ -4,6 +4,7 @@ import ShoppingBag from "./components/ShoppingBag";
 import Header from "./components/Header";
 
 import {useEffect, useState} from "react";
+import removeBtn from "./common/button-delete.jpg";
 
 // const a = [
 //
@@ -95,6 +96,7 @@ function App() {
     const [cartOpened, setCartOpened] = useState(false);
     const [items, setItems] = useState([])
     const [cartItems, setCartItems] = useState([])
+    const [searchValue, setSearchValue] = useState('')
 
     useEffect(() => {
         fetch("https://6138c162163b56001703a0b6.mockapi.io/items").then(res => {
@@ -104,9 +106,14 @@ function App() {
         })
     }, [])
 
-const onAddToCart = (obj) => {
+    const onAddToCart = (obj) => {
         setCartItems(prev => [...prev, obj])
-}
+    }
+
+    const onChangeSearchInput = (e) => {
+        setSearchValue(e.target.value)
+
+    }
 
     return (
         <div className="wrapper clear">
@@ -120,21 +127,31 @@ const onAddToCart = (obj) => {
 
             <div className="content p-40">
                 <div className='d-flex align-center mb-40 justify-between'>
-                    <h1>All Sneakers</h1>
+                    <h1>{searchValue ? `Search by request: "${searchValue}"` : 'All Sneakers'}</h1>
                     <div className='search-block d-flex'>
                         <img src={search} alt="search" className='search-icon'/>
-                        <input type="text" placeholder="Search"/>
+                        {searchValue && <img src={removeBtn} alt="clear"
+                                             width={30} className='removeBtn cu-p clear'
+                                             onClick={() => setSearchValue('')}
+                        />}
+                        <input type="text" placeholder="Search"
+                               onChange={onChangeSearchInput}
+                               value={searchValue}
+                        />
                     </div>
                 </div>
 
 
                 <div className='d-flex flex-wrap '>
-                    {items.map((item) => (
+                    {items.filter((item) => item.title.toLowerCase().includes(searchValue))
+                        .map((item, index) => (
                         <Card
+                            key={index}
                             title={item.title}
                             price={item.price}
                             imageUrl={item.imageUrl}
-                            onFavorite={() => {}}
+                            onFavorite={() => {
+                            }}
                             onPlus={(obj) => onAddToCart(item)}
                         />
                     ))}
