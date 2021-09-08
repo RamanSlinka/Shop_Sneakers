@@ -5,6 +5,7 @@ import Header from "./components/Header";
 
 import {useEffect, useState} from "react";
 import removeBtn from "./common/button-delete.jpg";
+import axios from "axios";
 
 // const a = [
 //
@@ -99,14 +100,23 @@ function App() {
     const [searchValue, setSearchValue] = useState('')
 
     useEffect(() => {
-        fetch("https://6138c162163b56001703a0b6.mockapi.io/items").then(res => {
-            return res.json()
-        }).then(json => {
-            setItems(json)
+        // fetch("https://6138c162163b56001703a0b6.mockapi.io/items").then(res => {
+        //     return res.json()
+        // }).then(json => {
+        //     setItems(json)
+        // })
+
+        axios.get("https://6138c162163b56001703a0b6.mockapi.io/items").then((res) => {
+                setItems(res.data);
+        }) ;
+        axios.get("https://6138c162163b56001703a0b6.mockapi.io/cart").then((res) => {
+                setCartItems(res.data)
         })
     }, [])
 
     const onAddToCart = (obj) => {
+        axios.post("https://6138c162163b56001703a0b6.mockapi.io/cart", obj);
+
         setCartItems(prev => [...prev, obj])
     }
 
@@ -150,9 +160,8 @@ function App() {
                             title={item.title}
                             price={item.price}
                             imageUrl={item.imageUrl}
-                            onFavorite={() => {
-                            }}
-                            onPlus={(obj) => onAddToCart(item)}
+                            onFavorite={() => {}}
+                            onPlus={() => onAddToCart(item)}
                         />
                     ))}
 
