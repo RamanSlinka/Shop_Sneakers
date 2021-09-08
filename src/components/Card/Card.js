@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import heartUnliked from "../../common/gray_heart.png";
-import plus from "../../common/plus-icon.png";
+import plus from "../../common/unchecked-svg.png";
+import checked from "../../common/checkbox-green.jpg";
 import styles from './Card.module.scss'
 
-const Card = ({imageUrl, title, price}) => {
+const Card = ({imageUrl, title, price, onFavorite, onPlus}) => {
+
+    const [isAdded, setIsAdded] = useState(false);
+    const onClickPlus = () => {
+        onPlus(title, price, imageUrl);
+        setIsAdded(!isAdded)
+    }
+
     return (
         <div className={styles.card} >
             <div className={styles.favorite}>
@@ -16,11 +24,13 @@ const Card = ({imageUrl, title, price}) => {
                     <span>Price: </span>
                     <b>{price}$</b>
                 </div>
-                <button className={styles.button}
-                onClick={() =>{}}
-                >
-                    <img src={plus} alt="plus" width={11}/>
-                </button>
+
+                    <img src={!isAdded ?  plus : checked} alt="plus"
+                         className={styles.button}
+
+                         onClick={onClickPlus}
+                    />
+
             </div>
         </div>
     );
