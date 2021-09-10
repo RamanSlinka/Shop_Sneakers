@@ -4,10 +4,30 @@ import removeBtn from "../common/button-delete.jpg";
 import Card from "../components/Card/Card";
 
 const Home = ({
-                  items, onAddToCart,
+                  items, onAddToCart,cartItems,
                   onAddToFavorite, onChangeSearchInput,
-                  searchValue, setSearchValue
+                  searchValue, setSearchValue,isLoading
               }) => {
+
+    const renderItems = () => {
+        const filteredItems = items.filter((item) =>
+            item.title.toLowerCase().includes(searchValue.toLowerCase()),
+            );
+        return (isLoading ? [...Array(16)] : filteredItems).map((item, index) => (
+                <Card
+                    key={index}
+                    onFavorite={onAddToFavorite}
+                    onPlus={(obj) => onAddToCart(item)}
+                    added={cartItems.some(obj => +obj.id === +item.id)}
+                    isLoading={isLoading}
+                    {...item}
+
+                />
+            ));
+
+    }
+
+
     return (
         <div className="content p-40">
             <div className='d-flex align-center mb-40 justify-between'>
@@ -29,18 +49,7 @@ const Home = ({
             <div className='d-flex flex-wrap '>
 
 
-                {items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-                    .map((item, index) => (
-                        <Card
-                            key={index}
-                            title={item.title}
-                            price={item.price}
-                            imageUrl={item.imageUrl}
-                            onFavorite={onAddToFavorite}
-                            onPlus={(obj) => onAddToCart(item)}
-                            id={item.id}
-                        />
-                    ))}
+                {renderItems()}
 
 
             </div>
