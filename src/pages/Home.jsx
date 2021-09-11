@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import search from "../common/Search.ico";
 import removeBtn from "../common/button-delete.jpg";
 import Card from "../components/Card/Card";
+import {AppContext} from "../App";
 
 const Home = ({
                   items, onAddToCart,cartItems,
                   onAddToFavorite, onChangeSearchInput,
                   searchValue, setSearchValue,isLoading
               }) => {
+
+    const {isItemAdded} = useContext(AppContext)
 
     const renderItems = () => {
         const filteredItems = items.filter((item) =>
@@ -18,7 +21,7 @@ const Home = ({
                     key={index}
                     onFavorite={onAddToFavorite}
                     onPlus={(obj) => onAddToCart(item)}
-                    added={cartItems.some(obj => +obj.id === +item.id)}
+                    added={isItemAdded(item && item.id)}
                     isLoading={isLoading}
                     {...item}
 

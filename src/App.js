@@ -1,6 +1,6 @@
 import ShoppingBag from "./components/ShoppingBag";
 import Header from "./components/Header";
-import React, {useEffect, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import axios from "axios";
 import {Route} from "react-router-dom";
 import Home from "./pages/Home";
@@ -91,6 +91,9 @@ import Favorites from "./pages/Favorites";
 //
 // ]
 
+export const AppContext =  createContext({});
+
+
 
 function App() {
 
@@ -114,10 +117,7 @@ function App() {
             setCartItems(cartResponse.data);
             setFavorites(favoriteResponse.data);
             setItems(itemResponse.data);
-
-
         }
-
         fetchData();
 
     }, [])
@@ -158,7 +158,13 @@ function App() {
         setSearchValue(e.target.value)
     }
 
+    const isItemAdded = (id) => {
+      return   cartItems.some(obj => +obj.id === +id)
+    }
+
+
     return (
+        <AppContext.Provider value={{cartItems, favorites, items, isItemAdded, onAddToFavorite}}>
         <div className="wrapper clear">
 
             {cartOpened && <ShoppingBag
@@ -170,7 +176,8 @@ function App() {
                 onClickedCart={() => setCartOpened(true)}/>
 
             <Route path="/" exact>
-                <Home items={items}
+                <Home
+                    items={items}
                       cartItems={cartItems}
                       searchValue={searchValue}
                       setSearchValue={setSearchValue}
@@ -181,12 +188,12 @@ function App() {
                 />
             </Route>
             <Route path="/favorites" exact>
-                <Favorites items={favorites}
-                           onAddToFavorite={onAddToFavorite}/>
+                <Favorites />
             </Route>
 
 
         </div>
+        </AppContext.Provider>
     );
 }
 
