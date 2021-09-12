@@ -1,11 +1,43 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import removeBtn from "../common/button-delete.jpg";
 import arrow from "../common/arrow.png";
 import emptyCart from "./../common/shopping-cart.jpg"
-import arrowLeft from "./../common/arrow_left_circle.svg"
+import orderComplete from "./../common/order-processing.jpg"
+import Info from "./Info";
+import {AppContext} from "../App";
+import axios from "axios";
 
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const ShoppingBag = ({onClose, items = [], onRemove}) => {
+    const {setCartItems, cartItems} = useContext(AppContext);
+    const [isOrderComplete, setIsOrderComplete] = useState(false);
+    const [orderId, setOrderId] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
+
+    const onClickOrder = async () => {
+        try {
+            setIsLoading(true)
+            const {data} = await axios
+                .post("https://6138c162163b56001703a0b6.mockapi.io/orders",
+                    {items: cartItems});
+
+            setOrderId(data.id)
+            setIsOrderComplete(true)
+            setCartItems([]);
+
+            for (let i = 0; i < Array.length; i++) {
+                const item = cartItems[i];
+                await axios.delete("https://6138c162163b56001703a0b6.mockapi.io/cart/" + item.id)
+                await delay(1000);
+            }
+        } catch (error) {
+            alert('Order was not created')
+        }
+        setIsLoading(false)
+    }
+
     return (
         <div className='overlay'>
             <div className="drawer">
@@ -17,7 +49,7 @@ const ShoppingBag = ({onClose, items = [], onRemove}) => {
                 </h2>
                 {items.length > 0
                     ?
-                    <div>
+                    <div className="d-flex flex-column flex">
                         <div className="items">
                             {items.map((obj, index) => (
                                 <div key={index} className="cartItem d-flex align-center mb-20">
@@ -28,7 +60,7 @@ const ShoppingBag = ({onClose, items = [], onRemove}) => {
                                         <b>{obj.price}$</b>
                                     </div>
                                     <img
-                                        onClick={()=>onRemove(obj.id)}
+                                        onClick={() => onRemove(obj.id)}
                                         src={removeBtn} alt="Remove"
                                         width={30} className='removeBtn'/>
                                 </div>
@@ -49,28 +81,22 @@ const ShoppingBag = ({onClose, items = [], onRemove}) => {
                                     <b>5%</b>
                                 </li>
                             </ul>
-                            <button className='greenBtn'>Place an order
+                            <button className='greenBtn'
+                                    onClick={onClickOrder}
+                                    disabled={isLoading}
+                            >Place an order
                                 <img src={arrow} alt='arrow' width={20} className='arrow'/>
                             </button>
                         </div>
                     </div>
                     :
-                    <div className="cartEmpty d-flex align-center justify-center flex-column flex">
-                        <img
-                            className="mb-20" width="120px" height="120px"
-                            src={emptyCart} alt="empty-cart"/>
-                        <h2> Empty cart</h2>
-                        <p className="opacity-6">Add at least 1 pair of sneakers to order </p>
-                        <button
-                            onClick={onClose}
-                            className="greenBtn">
-                            <img src={arrowLeft} alt="arrow" className="arrowLeft"/>
-                            Back
-                        </button>
-                    </div>
+                    <Info title={isOrderComplete ? "Order completed" : "Empty cart"}
+                          description={isOrderComplete
+                              ? `The order № ${orderId} will be transferred by courier delivery`
+                              : "Add at least 1 pair of sneakers to order"}
+                          image={isOrderComplete ? orderComplete : emptyCart}
+                    />
                 }
-
-
 
 
             </div>

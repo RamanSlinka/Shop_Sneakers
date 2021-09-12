@@ -48,10 +48,6 @@ header {
 }
 
 
-
-
-
-
 .search-block {
   border: 1px solid #d7d6d6;
   border-radius: 10px;
@@ -63,14 +59,16 @@ header {
 
     opacity: 0.5;
   }
-.clear{
-  position: absolute;
 
-  width: 18px;
-  height: 18px;
-  top: 10px;
-  right: 10px;
-}
+  .clear {
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+    top: 10px;
+    right: 10px;
+  }
+
   input {
     border: 0;
     padding: 13px;
@@ -100,11 +98,12 @@ header {
   box-shadow: -10px, 4px 24px rgba(0, 0, 0, 0.1);
   padding: 30px;
   display: flex;
-flex-direction: column;
+  flex-direction: column;
 
   h2 {
     margin: 0;
   }
+
   .items {
     flex: 1;
     overflow: auto;
@@ -136,6 +135,7 @@ flex-direction: column;
       }
 
     }
+
     .greenBtn {
       position: relative;
       width: 100%;
@@ -148,7 +148,10 @@ flex-direction: column;
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s ease-in-out;
-
+      &:disabled {
+        background-color: #bebebe;
+        cursor: default;
+      }
       &:hover {
         background: lighten(#9dd558, 10%);
 
@@ -186,6 +189,11 @@ flex-direction: column;
     cursor: pointer;
     transition: background 0.2s ease-in-out;
 
+    &:disabled {
+      background-color: #bebebe;
+      cursor: default;
+    }
+
     &:hover {
       background: lighten(#9dd558, 10%);
 
@@ -207,10 +215,6 @@ flex-direction: column;
     }
   }
 }
-
-
-
-
 
 
 .cartItem {
