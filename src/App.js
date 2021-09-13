@@ -1,10 +1,11 @@
-import ShoppingBag from "./components/ShoppingBag";
+import ShoppingBag from "./components/shoppingBag/ShoppingBag";
 import Header from "./components/Header";
 import React, {createContext, useEffect, useState} from "react";
 import axios from "axios";
 import {Route} from "react-router-dom";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
+import Orders from "./pages/Orders";
 
 
 // const a = [
@@ -166,14 +167,15 @@ function App() {
     return (
         <AppContext.Provider value={{cartItems,setCartItems, favorites,
             items, isItemAdded, onAddToFavorite,
-            setCartOpened}}>
+            setCartOpened, onAddToCart}}>
         <div className="wrapper clear">
 
-            {cartOpened && <ShoppingBag
+             <ShoppingBag
                 items={cartItems}
                 onClose={() => setCartOpened(false)}
                 onRemove={onRemoveItem}
-            />}
+                opened={cartOpened}
+            />
             <Header
                 onClickedCart={() => setCartOpened(true)}/>
 
@@ -191,6 +193,10 @@ function App() {
             </Route>
             <Route path="/favorites" exact>
                 <Favorites />
+            </Route>
+
+            <Route path="/orders" exact>
+                <Orders />
             </Route>
 
 

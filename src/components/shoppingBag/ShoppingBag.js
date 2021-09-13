@@ -1,20 +1,24 @@
 import React, {useContext, useState} from 'react';
-import removeBtn from "../common/button-delete.jpg";
-import arrow from "../common/arrow.png";
-import emptyCart from "./../common/shopping-cart.jpg"
-import orderComplete from "./../common/order-processing.jpg"
-import Info from "./Info";
-import {AppContext} from "../App";
+import removeBtn from "../../common/button-delete.jpg";
+import arrow from "../../common/arrow.png";
+import emptyCart from "../../common/shopping-cart.jpg"
+import orderComplete from "../../common/order-processing.jpg"
+import Info from "../Info";
+import styles from "./ShoppingBag.module.scss"
 import axios from "axios";
+import {useCart} from "../../hooks/useCart";
 
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-const ShoppingBag = ({onClose, items = [], onRemove}) => {
-    const {setCartItems, cartItems} = useContext(AppContext);
+const ShoppingBag = ({onClose, items = [], onRemove, opened}) => {
+ //   const {setCartItems, cartItems} = useContext(AppContext);
+
+    const {cartItems, setCartItems, totalPrice} = useCart()
     const [isOrderComplete, setIsOrderComplete] = useState(false);
     const [orderId, setOrderId] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+
 
     const onClickOrder = async () => {
         try {
@@ -27,7 +31,7 @@ const ShoppingBag = ({onClose, items = [], onRemove}) => {
             setIsOrderComplete(true)
             setCartItems([]);
 
-            for (let i = 0; i < Array.length; i++) {
+            for (let i = 0; i < cartItems.length; i++) {
                 const item = cartItems[i];
                 await axios.delete("https://6138c162163b56001703a0b6.mockapi.io/cart/" + item.id)
                 await delay(1000);
@@ -39,8 +43,8 @@ const ShoppingBag = ({onClose, items = [], onRemove}) => {
     }
 
     return (
-        <div className='overlay'>
-            <div className="drawer">
+        <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ""}`}>
+            <div className={styles.drawer}>
                 <h2 className='mb-30 d-flex justify-between'>Shopping Bag
                     <img src={removeBtn} alt="Remove"
                          width={30} className='removeBtn cu-p'
@@ -73,12 +77,12 @@ const ShoppingBag = ({onClose, items = [], onRemove}) => {
                                 <li>
                                     <span>Total</span>
                                     <div></div>
-                                    <b>11000$</b>
+                                    <b>{totalPrice}$</b>
                                 </li>
                                 <li>
-                                    <span>Sale</span>
+                                    <span>Tax (included in the price) 5%</span>
                                     <div></div>
-                                    <b>5%</b>
+                                    <b>{totalPrice / 100 * 5} $</b>
                                 </li>
                             </ul>
                             <button className='greenBtn'
