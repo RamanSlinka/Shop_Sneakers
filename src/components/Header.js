@@ -4,8 +4,12 @@ import cart from "../common/cart-icon.jpg";
 import user from "../common/user-login.jpg";
 import heart from "../common/gray_heart.png";
 import {Link} from "react-router-dom";
+import {useCart} from "../hooks/useCart";
 
 const Header = ({onClickedCart}) => {
+
+    const { totalPrice} = useCart()
+
     return (
         <header className='d-flex justify-between align-center p-40'>
             <Link to={'/'}>
@@ -24,7 +28,7 @@ const Header = ({onClickedCart}) => {
                         onClick={onClickedCart}
                     >
                         <img src={cart} width={30} height={30} alt="cart"/>
-                        <span>  1212 $</span>
+                        <span>  {totalPrice} $</span>
                     </li>
                     <li>
                         <Link to={'/favorites'}>
@@ -32,9 +36,9 @@ const Header = ({onClickedCart}) => {
                                  src={heart} height={30} width={30} alt="favorite"/>
                         </Link>
                     </li>
-                    <li>
+                    <Link to={"/orders"}>
                         <img src={user} height={30} width={30} alt="user"/>
-                    </li>
+                    </Link>
                 </ul>
             </div>
         </header>
