@@ -6,9 +6,9 @@ const Info = ({title, description, image}) => {
 
     const {setCartOpened} = useContext(AppContext);
     return (
-        <div className="cartEmpty d-flex align-center justify-center flex-column flex">
+        <div className="cartEmpty d-flex align-center  flex-column flex">
             <img
-                className="mb-20" width="120px"
+                className="mb-20 top" width="170px"
                 src={image} alt="empty-cart"/>
             <h2>{title} </h2>
             <p className="opacity-6">{description}

@@ -1,16 +1,17 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import search from "../common/Search.ico";
 import removeBtn from "../common/button-delete.jpg";
 import Card from "../components/Card/Card";
-import {AppContext} from "../App";
+import {FcSearch} from "@react-icons/all-files/fc/FcSearch";
+
 
 const Home = ({
-                  items, onAddToCart,cartItems,
+                  items, onAddToCart,
                   onAddToFavorite, onChangeSearchInput,
                   searchValue, setSearchValue,isLoading
               }) => {
 
-    const {isItemAdded} = useContext(AppContext)
+
 
     const renderItems = () => {
         const filteredItems = items.filter((item) =>
@@ -19,10 +20,9 @@ const Home = ({
         return (isLoading ? [...Array(16)] : filteredItems).map((item, index) => (
                 <Card
                     key={index}
-                    onFavorite={onAddToFavorite}
-                    onPlus={(obj) => onAddToCart(item)}
-                    added={isItemAdded(item && item.id)}
-                    isLoading={isLoading}
+                    onFavorite={(obj) => onAddToFavorite(obj)}
+                    onPlus={(obj) => onAddToCart(obj)}
+                    loading={isLoading}
                     {...item}
 
                 />
@@ -36,12 +36,12 @@ const Home = ({
             <div className='d-flex align-center mb-40 justify-between'>
                 <h1>{searchValue ? `Search by request: "${searchValue}"` : 'All Sneakers'}</h1>
                 <div className='search-block d-flex'>
-                    <img src={search} alt="search" className='search-icon'/>
+                    <FcSearch  size={33} />
                     {searchValue && <img src={removeBtn} alt="clear"
                                          width={30} className='removeBtn cu-p clear'
                                          onClick={() => setSearchValue('')}
                     />}
-                    <input type="text" placeholder="Search"
+                    <input type="text" placeholder="Search..."
                            onChange={onChangeSearchInput}
                            value={searchValue}
                     />
@@ -50,11 +50,7 @@ const Home = ({
 
 
             <div className='d-flex flex-wrap '>
-
-
                 {renderItems()}
-
-
             </div>
 
 

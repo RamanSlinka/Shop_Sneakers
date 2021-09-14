@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useState} from 'react';
 import removeBtn from "../../common/button-delete.jpg";
 import arrow from "../../common/arrow.png";
 import emptyCart from "../../common/shopping-cart.jpg"
@@ -12,9 +12,8 @@ import {useCart} from "../../hooks/useCart";
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const ShoppingBag = ({onClose, items = [], onRemove, opened}) => {
- //   const {setCartItems, cartItems} = useContext(AppContext);
 
-    const {cartItems, setCartItems, totalPrice} = useCart()
+    const {cartItems, setCartItems, totalPrice} = useCart();
     const [isOrderComplete, setIsOrderComplete] = useState(false);
     const [orderId, setOrderId] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -54,7 +53,7 @@ const ShoppingBag = ({onClose, items = [], onRemove, opened}) => {
                 {items.length > 0
                     ?
                     <div className="d-flex flex-column flex">
-                        <div className="items">
+                        <div className="items ">
                             {items.map((obj, index) => (
                                 <div key={index} className="cartItem d-flex align-center mb-20">
 
@@ -76,12 +75,12 @@ const ShoppingBag = ({onClose, items = [], onRemove, opened}) => {
                             <ul className='cartTotalBlock'>
                                 <li>
                                     <span>Total</span>
-                                    <div></div>
+                                    <div> </div>
                                     <b>{totalPrice}$</b>
                                 </li>
                                 <li>
                                     <span>Tax (included in the price) 5%</span>
-                                    <div></div>
+                                    <div> </div>
                                     <b>{totalPrice / 100 * 5} $</b>
                                 </li>
                             </ul>

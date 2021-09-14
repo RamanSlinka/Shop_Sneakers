@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import heartUnliked from "../../common/gray_heart.png";
 import heartLiked from "../../common/pink_heart.png";
-import plus from "../../common/unchecked-svg.png";
+import plus from "../../common/plus.jpg";
 import checked from "../../common/checkbox-green.jpg";
 import styles from './Card.module.scss'
 import ContentLoader from "react-content-loader";
@@ -11,28 +11,31 @@ const Card = ({
                   id, imageUrl, title,
                   price, onFavorite,
                   onPlus, selected = false,
-                  added = false, isLoading
+                  loading = false
               }) => {
 
     const {isItemAdded} = useContext(AppContext)
 
-    const [isFavorite, setIsFavorite] = useState(selected)
-    // const [isAdded, setIsAdded] = useState(added);
+    const [isFavorite, setIsFavorite] = useState(selected);
+    const itemObj = {id, parentId: id, title, imageUrl, price};
+    const [itemCheckBox, setItemCheckBox] = useState(false)
 
     const onClickPlus = () => {
-        onPlus(title, price, imageUrl, id);
-
+        onPlus(itemObj);
+        setItemCheckBox(!itemCheckBox)
+        alert('Added to cart')
     }
 
     const onClickFavorites = () => {
-        onFavorite({title, price, imageUrl, id});
+        onFavorite(itemObj);
         setIsFavorite(!isFavorite);
+
     };
 
     return (
         <div className={styles.card}>
             {
-                isLoading ? <ContentLoader
+                loading ? <ContentLoader
                         speed={2}
                         width={150}
                         height={250}
@@ -52,7 +55,10 @@ const Card = ({
                         {onFavorite && <div className={styles.favorite}>
                             <img
                                 onClick={onClickFavorites}
-                                src={isFavorite ? heartLiked : heartUnliked} alt="heartUnliked" width={20}/>
+                                src={isFavorite
+                                    ? heartLiked
+                                    : heartUnliked
+                                } alt="heartUnliked" width={20}/>
                         </div>}
                         <img src={imageUrl} alt="sneakers" width={133} height={112}/>
                         <h5>{title}</h5>
@@ -62,11 +68,14 @@ const Card = ({
                                 <b>{price}$</b>
                             </div>
 
-                            {onPlus && <img src={isItemAdded(id) ? checked : plus} alt="plus"
-                                            className={styles.button}
-
+                            {onPlus && (
+                            <img className={styles.button}
+                                            src={itemCheckBox ? checked : plus} alt="plus"
+                                            // src={isItemAdded() ? checked : plus} alt="plus"
                                             onClick={onClickPlus}
-                            />}
+
+                            />
+                            )}
                         </div>
                     </>
             }
