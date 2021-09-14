@@ -15,13 +15,9 @@ const Favorites = () => {
                 {favorites.map((item, index) => (
                     <Card
                         key={index}
-                        title={item.title}
-                        price={item.price}
-                        imageUrl={item.imageUrl}
                         selected={true}
                         onFavorite={onAddToFavorite}
-                        id={item.id}
-                        // onPlus={(obj) => onAddToCart(item)}
+                        {...item}
                     />
                 ))}
 

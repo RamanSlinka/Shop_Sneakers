@@ -5,6 +5,15 @@ import user from "../common/user-login.jpg";
 import heart from "../common/gray_heart.png";
 import {Link} from "react-router-dom";
 import {useCart} from "../hooks/useCart";
+import {SiJavascript} from "@react-icons/all-files/si/SiJavascript";
+import {FcShop} from "@react-icons/all-files/fc/FcShop";
+import {MdFavorite} from "@react-icons/all-files/md/MdFavorite";
+import {AiOutlineShoppingCart} from "@react-icons/all-files/ai/AiOutlineShoppingCart";
+import {SiShopify} from "@react-icons/all-files/si/SiShopify";
+import {FcAbout} from "@react-icons/all-files/fc/FcAbout";
+import {FaHome} from "@react-icons/all-files/fa/FaHome";
+
+
 
 const Header = ({onClickedCart}) => {
 
@@ -24,21 +33,45 @@ const Header = ({onClickedCart}) => {
             </Link>
             <div className='headerRight'>
                 <ul className='d-flex'>
-                    <li className='mr-30 cu-p'
+                    <Link to="/"
+                        className='mr-30 cu-p'>
+                        <FaHome    size={30}
+                                    color={'#66a6ff'}
+                        />
+                    </Link>
+                    <Link to="/about"
+                        className='mr-30 cu-p'>
+                        <FcAbout    size={30}
+                                    color={'#66a6ff'}
+                        />
+                    </Link>
+
+                    <Link to={"/orders"}>
+                        <SiShopify
+                            className='mr-20 cu-p'
+                            size={30}
+                            color={'#66a6ff'}
+                        />
+                    </Link>
+
+                        <Link to={'/favorites'}>
+                            <MdFavorite
+                                className='mr-20 cu-p'
+                                size={30}
+                            color={'#66a6ff'}
+                            />
+                        </Link>
+
+
+                    <li className='mr-20 cu-p'
                         onClick={onClickedCart}
                     >
-                        <img src={cart} width={30} height={30} alt="cart"/>
-                        <span>  {totalPrice} $</span>
+                        <AiOutlineShoppingCart
+                            size={30}
+                            color={'#66a6ff'}
+                        />
+                        <span className='pb-20'>  {totalPrice} $</span>
                     </li>
-                    <li>
-                        <Link to={'/favorites'}>
-                            <img className='mr-30 cu-p'
-                                 src={heart} height={30} width={30} alt="favorite"/>
-                        </Link>
-                    </li>
-                    <Link to={"/orders"}>
-                        <img src={user} height={30} width={30} alt="user"/>
-                    </Link>
                 </ul>
             </div>
         </header>

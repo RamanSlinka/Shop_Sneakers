@@ -27,16 +27,14 @@ const Orders = () => {
     return (
         <div className="content p-40">
             <div className='d-flex align-center mb-40 justify-between'>
-                <h1>My all orders</h1>
+                <h1>History of popular products</h1>
             </div>
-            <div className='d-flex flex-wrap '>
+            <div  className='d-flex flex-wrap ' >
 
                 {(isLoading ? [...Array(16)] : orders).map((item, index) => (
                     <Card
                         key={index}
                         isLoading={isLoading}
-                        // added={isItemAdded(item && item.id)}
-
                         {...item}
                     />
                 ))}

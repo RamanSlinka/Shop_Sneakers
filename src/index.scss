@@ -3,7 +3,8 @@ body {
   font-family: "Dosis", system-ui;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #bdeefc;
+  background-image: linear-gradient(120deg, #89f7fe 50%, #66a6ff 100%);
+;
 }
 
 * {
@@ -56,7 +57,7 @@ header {
   position: relative;
 
   .search-icon {
-
+width: 40px;
     opacity: 0.5;
   }
 
