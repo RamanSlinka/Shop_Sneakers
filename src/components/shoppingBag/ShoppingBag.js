@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import removeBtn from "../../common/button-delete.jpg";
 import arrow from "../../common/arrow.png";
 import emptyCart from "../../common/shopping-cart.jpg"
@@ -19,26 +19,30 @@ const ShoppingBag = ({onClose, items = [], onRemove, opened}) => {
     const [isLoading, setIsLoading] = useState(false)
 
 
+
     const onClickOrder = async () => {
-        try {
-            setIsLoading(true)
-            const {data} = await axios
-                .post("https://6138c162163b56001703a0b6.mockapi.io/orders",
-                    {items: cartItems});
 
-            setOrderId(data.id)
-            setIsOrderComplete(true)
-            setCartItems([]);
+            try {
+                setIsLoading(true)
+                const {data} = await axios
+                    .post("https://6138c162163b56001703a0b6.mockapi.io/orders",
+                        {items: cartItems});
 
-            for (let i = 0; i < cartItems.length; i++) {
-                const item = cartItems[i];
-                await axios.delete("https://6138c162163b56001703a0b6.mockapi.io/cart/" + item.id)
-                await delay(1000);
+                setOrderId(data.id)
+                setIsOrderComplete(true)
+                setCartItems([]);
+
+                for (let i = 0; i < cartItems.length; i++) {
+                    const item = cartItems[i];
+                    await axios.delete("https://6138c162163b56001703a0b6.mockapi.io/cart/" + item.id)
+                    await delay(1000);
+                }
+            } catch (error) {
+                alert('Order was not created')
             }
-        } catch (error) {
-            alert('Order was not created')
-        }
-        setIsLoading(false)
+            setIsLoading(false)
+
+
     }
 
     return (
@@ -75,12 +79,12 @@ const ShoppingBag = ({onClose, items = [], onRemove, opened}) => {
                             <ul className='cartTotalBlock'>
                                 <li>
                                     <span>Total</span>
-                                    <div> </div>
+                                    <div></div>
                                     <b>{totalPrice}$</b>
                                 </li>
                                 <li>
                                     <span>Tax (included in the price) 5%</span>
-                                    <div> </div>
+                                    <div></div>
                                     <b>{totalPrice / 100 * 5} $</b>
                                 </li>
                             </ul>
@@ -90,6 +94,9 @@ const ShoppingBag = ({onClose, items = [], onRemove, opened}) => {
                             >Place an order
                                 <img src={arrow} alt='arrow' width={20} className='arrow'/>
                             </button>
+                            <div>
+
+                            </div>
                         </div>
                     </div>
                     :
