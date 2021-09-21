@@ -16,7 +16,7 @@ const Header = ({onClickedCart}) => {
 
     return (
         <header className='d-flex justify-between align-center p-40'>
-            <Link to={'/'}>
+            <Link to={'/Shop_Sneakers'}>
                 <div className='d-flex align-center'>
 
                     <img src={logo} className='logo' alt="logo"/>
