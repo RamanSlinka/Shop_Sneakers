@@ -191,7 +191,7 @@ function App() {
                 <Header
                     onClickedCart={() => setCartOpened(true)}/>
 
-                <Route path="" exact>
+                <Route path="/Shop_Sneakers" exact>
                     <Home
                         items={items}
                         cartItems={cartItems}
@@ -203,14 +203,14 @@ function App() {
                         isLoading={isLoading}
                     />
                 </Route>
-                <Route path="favorites" exact>
+                <Route path="/favorites" exact>
                     <Favorites/>
                 </Route>
 
-                <Route path="orders" exact>
+                <Route path="/orders" exact>
                     <Orders/>
                 </Route>
-                <Route path="about" exact>
+                <Route path="/about" exact>
                     <About/>
                 </Route>
 

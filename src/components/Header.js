@@ -16,7 +16,7 @@ const Header = ({onClickedCart}) => {
 
     return (
         <header className='d-flex justify-between align-center p-40'>
-            <Link to={'/'}>
+            <Link to={'/Shop_Sneakers'}>
                 <div className='d-flex align-center'>
 
                     <img src={logo} className='logo' alt="logo"/>
@@ -28,7 +28,7 @@ const Header = ({onClickedCart}) => {
             </Link>
             <div className='headerRight'>
                 <ul className='d-flex'>
-                    <Link to="/"
+                    <Link to="/Shop_Sneakers"
                         className='mr-30 cu-p'>
                         <FaHome    size={30}
                                     color={'#66a6ff'}
@@ -41,7 +41,7 @@ const Header = ({onClickedCart}) => {
                         />
                     </Link>
 
-                    <Link to={"/orders"}>
+                    <Link to="/orders">
                         <SiShopify
                             className='mr-20 cu-p'
                             size={30}
@@ -49,7 +49,7 @@ const Header = ({onClickedCart}) => {
                         />
                     </Link>
 
-                        <Link to={'/favorites'}>
+                        <Link to='/favorites'>
                             <MdFavorite
                                 className='mr-20 cu-p'
                                 size={30}
