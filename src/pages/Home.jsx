@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import search from "../common/Search.ico";
+import React from 'react';
 import removeBtn from "../common/button-delete.jpg";
 import Card from "../components/Card/Card";
 import {FcSearch} from "@react-icons/all-files/fc/FcSearch";

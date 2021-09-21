@@ -1,20 +1,17 @@
-import React, {useContext, useState} from 'react';
+import React, { useState} from 'react';
 import heartUnliked from "../../common/gray_heart.png";
 import heartLiked from "../../common/pink_heart.png";
 import plus from "../../common/plus.jpg";
 import checked from "../../common/checkbox-green.jpg";
 import styles from './Card.module.scss'
 import ContentLoader from "react-content-loader";
-import {AppContext} from "../../App";
 
-const Card = ({
-                  id, imageUrl, title,
+const Card = ({   id, imageUrl, title,
                   price, onFavorite,
                   onPlus, selected = false,
                   loading = false
               }) => {
 
-    const {isItemAdded} = useContext(AppContext)
 
     const [isFavorite, setIsFavorite] = useState(selected);
     const itemObj = {id, parentId: id, title, imageUrl, price};
