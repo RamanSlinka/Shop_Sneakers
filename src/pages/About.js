@@ -13,7 +13,8 @@ const About = () => {
                 <li>Working with the server. Axios. Indication of loading data from the server.</li>
                 <li>Using "Mock API" as BackEnd</li>
                 <li>Loader component.React Skeleton.</li>
-                <li>SCSS. CSS Animations.Library React icons</li>
+                <li>SCSS. CSS Animations.Library React icons.</li>
+                <li>React Bootstrap. Slider.</li>
             </ul>
         </div>
     );

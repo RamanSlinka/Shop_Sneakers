@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Orders from "./pages/Orders";
 import About from "./pages/About";
+import Slider from "./components/Slider";
 
 
 // const a = [
@@ -106,7 +107,6 @@ function App() {
     const [isLoading, setIsLoading] = useState(true);
 
 
-
     useEffect(() => {
 
         async function fetchData() {
@@ -123,7 +123,6 @@ function App() {
             } catch (error) {
                 alert('ERROR')
             }
-
         }
 
         fetchData();
@@ -137,7 +136,7 @@ function App() {
                 await axios.delete(`https://6138c162163b56001703a0b6.mockapi.io/cart/${findItem.id}`)
                 setCartItems(prev => prev.filter(item => +item.parentId !== +obj.id));
             } else {
-             const {data} =  await axios.post("https://6138c162163b56001703a0b6.mockapi.io/cart", obj)
+                const {data} = await axios.post("https://6138c162163b56001703a0b6.mockapi.io/cart", obj)
                 setCartItems((prev) => [...prev, data])
             }
         } catch (error) {
@@ -176,12 +175,11 @@ function App() {
     }
 
 
-
     return (
         <AppContext.Provider value={{
             cartItems, setCartItems, favorites,
             items, isItemAdded, onAddToFavorite,
-            setCartOpened, onAddToCart
+            setCartOpened, onAddToCart, setSearchValue
         }}>
             <div className="wrapper clear">
 
