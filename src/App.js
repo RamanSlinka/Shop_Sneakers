@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Orders from "./pages/Orders";
 import About from "./pages/About";
-import Slider from "./components/Slider";
 
 
 // const a = [
@@ -192,7 +191,7 @@ function App() {
                 <Header
                     onClickedCart={() => setCartOpened(true)}/>
 
-                <Route path="/" exact>
+                <Route path="/Shop_Sneakers" exact>
                     <Home
                         items={items}
                         cartItems={cartItems}
