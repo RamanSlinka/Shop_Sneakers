@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Shop_Sneakers/static/css/main.1791be01.chunk.css",
-    "main.js": "/Shop_Sneakers/static/js/main.72802d45.chunk.js",
-    "main.js.map": "/Shop_Sneakers/static/js/main.72802d45.chunk.js.map",
+    "main.js": "/Shop_Sneakers/static/js/main.68d34c44.chunk.js",
+    "main.js.map": "/Shop_Sneakers/static/js/main.68d34c44.chunk.js.map",
     "runtime-main.js": "/Shop_Sneakers/static/js/runtime-main.edce0e92.js",
     "runtime-main.js.map": "/Shop_Sneakers/static/js/runtime-main.edce0e92.js.map",
     "static/css/2.1cdcfe91.chunk.css": "/Shop_Sneakers/static/css/2.1cdcfe91.chunk.css",
@@ -15,7 +15,6 @@
     "static/media/1w.2fb44775.jpg": "/Shop_Sneakers/static/media/1w.2fb44775.jpg",
     "static/media/2w.4d445122.jpg": "/Shop_Sneakers/static/media/2w.4d445122.jpg",
     "static/media/3w.01d3f6aa.jpg": "/Shop_Sneakers/static/media/3w.01d3f6aa.jpg",
-    "static/media/Search.e3c497f2.ico": "/Shop_Sneakers/static/media/Search.e3c497f2.ico",
     "static/media/arrow.400f1006.png": "/Shop_Sneakers/static/media/arrow.400f1006.png",
     "static/media/arrow_left_circle.c3465a7a.svg": "/Shop_Sneakers/static/media/arrow_left_circle.c3465a7a.svg",
     "static/media/button-delete.73a3ab4e.jpg": "/Shop_Sneakers/static/media/button-delete.73a3ab4e.jpg",
@@ -31,6 +30,6 @@
     "static/css/2.1cdcfe91.chunk.css",
     "static/js/2.d31534f1.chunk.js",
     "static/css/main.1791be01.chunk.css",
-    "static/js/main.72802d45.chunk.js"
+    "static/js/main.68d34c44.chunk.js"
   ]
 }
